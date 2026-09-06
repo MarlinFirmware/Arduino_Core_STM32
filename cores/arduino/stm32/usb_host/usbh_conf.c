@@ -254,6 +254,8 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
     }
 
     USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&g_hhcd));
+
+#ifdef USB_OTG_HS
   } else if (phost->id == HOST_HS) {
     /* Link the driver to the stack. */
     g_hhcd.pData = phost;
@@ -279,6 +281,8 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
 
     USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&g_hhcd));
   }
+#endif // USB_OTG_HS
+
   return USBH_OK;
 }
 
